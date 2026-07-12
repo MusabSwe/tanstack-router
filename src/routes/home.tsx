@@ -5,6 +5,10 @@ export const Route = createFileRoute('/home')({
 })
 
 function RouteComponent() {
+    // useNavigate is a hook from @tanstack/react-router 
+    // that returns a function for navigating to a different route.
+    // It allows you to programmatically navigate to a different route
+    // in your application.
     const navigate = useNavigate();
 
     const handleClick = () => {
