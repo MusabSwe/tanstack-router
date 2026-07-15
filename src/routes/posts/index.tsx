@@ -18,7 +18,7 @@ function RouteComponent() {
     return (
         <div className='flex flex-col gap-8 p-4'>
             {posts?.map((post: any) => (
-                <Link to={`/posts/$postId`} params={{ postId: String(post.id) }} key={post.id} className='no-underline'>
+                <Link to={`/posts/$postId`} params={{ postId: post.id }} key={post.id} className='no-underline'>
                     <div key={post.id} className='flex flex-col gap-2 rounded-lg border p-4'>
                         <h2 className='text-xl font-bold'>{post.title}</h2>
                         <p>{post.body}</p>
