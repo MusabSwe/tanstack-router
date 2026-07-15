@@ -15,6 +15,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as YoutubeIndexRouteImport } from './routes/youtube/index'
+import { Route as PostsIndexRouteImport } from './routes/posts/index'
+import { Route as PostsPostIdRouteImport } from './routes/posts/$postId'
 import { Route as YoutubeProfileRouteRouteImport } from './routes/youtube/profile/route'
 import { Route as YoutubeProfileIndexRouteImport } from './routes/youtube/profile/index'
 import { Route as YoutubeProfileMusabRouteImport } from './routes/youtube/profile/musab'
@@ -50,6 +52,16 @@ const YoutubeIndexRoute = YoutubeIndexRouteImport.update({
   path: '/youtube/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PostsIndexRoute = PostsIndexRouteImport.update({
+  id: '/posts/',
+  path: '/posts/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PostsPostIdRoute = PostsPostIdRouteImport.update({
+  id: '/posts/$postId',
+  path: '/posts/$postId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const YoutubeProfileRouteRoute = YoutubeProfileRouteRouteImport.update({
   id: '/youtube/profile',
   path: '/youtube/profile',
@@ -78,6 +90,8 @@ export interface FileRoutesByFullPath {
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/': typeof PostsIndexRoute
   '/youtube/': typeof YoutubeIndexRoute
   '/youtube/profile/fahad': typeof YoutubeProfileFahadRoute
   '/youtube/profile/musab': typeof YoutubeProfileMusabRoute
@@ -89,6 +103,8 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts': typeof PostsIndexRoute
   '/youtube': typeof YoutubeIndexRoute
   '/youtube/profile/fahad': typeof YoutubeProfileFahadRoute
   '/youtube/profile/musab': typeof YoutubeProfileMusabRoute
@@ -102,6 +118,8 @@ export interface FileRoutesById {
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/': typeof PostsIndexRoute
   '/youtube/': typeof YoutubeIndexRoute
   '/youtube/profile/fahad': typeof YoutubeProfileFahadRoute
   '/youtube/profile/musab': typeof YoutubeProfileMusabRoute
@@ -116,6 +134,8 @@ export interface FileRouteTypes {
     | '/home'
     | '/more'
     | '/youtube/profile'
+    | '/posts/$postId'
+    | '/posts/'
     | '/youtube/'
     | '/youtube/profile/fahad'
     | '/youtube/profile/musab'
@@ -127,6 +147,8 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/posts/$postId'
+    | '/posts'
     | '/youtube'
     | '/youtube/profile/fahad'
     | '/youtube/profile/musab'
@@ -139,6 +161,8 @@ export interface FileRouteTypes {
     | '/home'
     | '/more'
     | '/youtube/profile'
+    | '/posts/$postId'
+    | '/posts/'
     | '/youtube/'
     | '/youtube/profile/fahad'
     | '/youtube/profile/musab'
@@ -152,6 +176,8 @@ export interface RootRouteChildren {
   HomeRoute: typeof HomeRoute
   MoreRoute: typeof MoreRoute
   YoutubeProfileRouteRoute: typeof YoutubeProfileRouteRouteWithChildren
+  PostsPostIdRoute: typeof PostsPostIdRoute
+  PostsIndexRoute: typeof PostsIndexRoute
   YoutubeIndexRoute: typeof YoutubeIndexRoute
 }
 
@@ -197,6 +223,20 @@ declare module '@tanstack/react-router' {
       path: '/youtube'
       fullPath: '/youtube/'
       preLoaderRoute: typeof YoutubeIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts/': {
+      id: '/posts/'
+      path: '/posts'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof PostsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts/$postId': {
+      id: '/posts/$postId'
+      path: '/posts/$postId'
+      fullPath: '/posts/$postId'
+      preLoaderRoute: typeof PostsPostIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/youtube/profile': {
@@ -252,6 +292,8 @@ const rootRouteChildren: RootRouteChildren = {
   HomeRoute: HomeRoute,
   MoreRoute: MoreRoute,
   YoutubeProfileRouteRoute: YoutubeProfileRouteRouteWithChildren,
+  PostsPostIdRoute: PostsPostIdRoute,
+  PostsIndexRoute: PostsIndexRoute,
   YoutubeIndexRoute: YoutubeIndexRoute,
 }
 export const routeTree = rootRouteImport
