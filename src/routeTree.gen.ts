@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SlowPostsRouteImport } from './routes/slowPosts'
 import { Route as MoreRouteImport } from './routes/more'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -22,6 +23,11 @@ import { Route as YoutubeProfileIndexRouteImport } from './routes/youtube/profil
 import { Route as YoutubeProfileMusabRouteImport } from './routes/youtube/profile/musab'
 import { Route as YoutubeProfileFahadRouteImport } from './routes/youtube/profile/fahad'
 
+const SlowPostsRoute = SlowPostsRouteImport.update({
+  id: '/slowPosts',
+  path: '/slowPosts',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MoreRoute = MoreRouteImport.update({
   id: '/more',
   path: '/more',
@@ -89,6 +95,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/slowPosts': typeof SlowPostsRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -103,6 +110,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/slowPosts': typeof SlowPostsRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/posts': typeof PostsIndexRoute
   '/youtube': typeof YoutubeIndexRoute
@@ -117,6 +125,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/slowPosts': typeof SlowPostsRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -133,6 +142,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/slowPosts'
     | '/youtube/profile'
     | '/posts/$postId'
     | '/posts/'
@@ -147,6 +157,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/slowPosts'
     | '/posts/$postId'
     | '/posts'
     | '/youtube'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/slowPosts'
     | '/youtube/profile'
     | '/posts/$postId'
     | '/posts/'
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HomeRoute: typeof HomeRoute
   MoreRoute: typeof MoreRoute
+  SlowPostsRoute: typeof SlowPostsRoute
   YoutubeProfileRouteRoute: typeof YoutubeProfileRouteRouteWithChildren
   PostsPostIdRoute: typeof PostsPostIdRoute
   PostsIndexRoute: typeof PostsIndexRoute
@@ -183,6 +196,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/slowPosts': {
+      id: '/slowPosts'
+      path: '/slowPosts'
+      fullPath: '/slowPosts'
+      preLoaderRoute: typeof SlowPostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/more': {
       id: '/more'
       path: '/more'
@@ -291,6 +311,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HomeRoute: HomeRoute,
   MoreRoute: MoreRoute,
+  SlowPostsRoute: SlowPostsRoute,
   YoutubeProfileRouteRoute: YoutubeProfileRouteRouteWithChildren,
   PostsPostIdRoute: PostsPostIdRoute,
   PostsIndexRoute: PostsIndexRoute,
