@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlowPostsRouteImport } from './routes/slowPosts'
+import { Route as ShopRouteImport } from './routes/shop'
 import { Route as MoreRouteImport } from './routes/more'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -26,6 +27,11 @@ import { Route as YoutubeProfileFahadRouteImport } from './routes/youtube/profil
 const SlowPostsRoute = SlowPostsRouteImport.update({
   id: '/slowPosts',
   path: '/slowPosts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShopRoute = ShopRouteImport.update({
+  id: '/shop',
+  path: '/shop',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MoreRoute = MoreRouteImport.update({
@@ -95,6 +101,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/shop': typeof ShopRoute
   '/slowPosts': typeof SlowPostsRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/shop': typeof ShopRoute
   '/slowPosts': typeof SlowPostsRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/posts': typeof PostsIndexRoute
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/home': typeof HomeRoute
   '/more': typeof MoreRoute
+  '/shop': typeof ShopRoute
   '/slowPosts': typeof SlowPostsRoute
   '/youtube/profile': typeof YoutubeProfileRouteRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
@@ -142,6 +151,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/shop'
     | '/slowPosts'
     | '/youtube/profile'
     | '/posts/$postId'
@@ -157,6 +167,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/shop'
     | '/slowPosts'
     | '/posts/$postId'
     | '/posts'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/home'
     | '/more'
+    | '/shop'
     | '/slowPosts'
     | '/youtube/profile'
     | '/posts/$postId'
@@ -187,6 +199,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   HomeRoute: typeof HomeRoute
   MoreRoute: typeof MoreRoute
+  ShopRoute: typeof ShopRoute
   SlowPostsRoute: typeof SlowPostsRoute
   YoutubeProfileRouteRoute: typeof YoutubeProfileRouteRouteWithChildren
   PostsPostIdRoute: typeof PostsPostIdRoute
@@ -201,6 +214,13 @@ declare module '@tanstack/react-router' {
       path: '/slowPosts'
       fullPath: '/slowPosts'
       preLoaderRoute: typeof SlowPostsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shop': {
+      id: '/shop'
+      path: '/shop'
+      fullPath: '/shop'
+      preLoaderRoute: typeof ShopRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/more': {
@@ -311,6 +331,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   HomeRoute: HomeRoute,
   MoreRoute: MoreRoute,
+  ShopRoute: ShopRoute,
   SlowPostsRoute: SlowPostsRoute,
   YoutubeProfileRouteRoute: YoutubeProfileRouteRouteWithChildren,
   PostsPostIdRoute: PostsPostIdRoute,
